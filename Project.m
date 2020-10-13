@@ -5,4 +5,4 @@ clc
 N = 500;
 rho = 0.85;
 
-coords = create_lattice(N,rho);
+coords = create_coords(N,rho);

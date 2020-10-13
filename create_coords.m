@@ -7,5 +7,5 @@ for i = 1:N
     randomx = randi([0 Ncube*100000])/100000;
     randomy = randi([0 Ncube*100000])/100000;
     randomz = randi([0 Ncube*100000])/100000;
-    coordinates(:,N) = [randomx randomy randomz]';
+    coordinates(:,i) = [randomx randomy randomz]';
 end
