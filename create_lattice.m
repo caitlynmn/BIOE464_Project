@@ -1,4 +1,4 @@
-function initial_lattice = create_lattice(N,density)
+function coordinates = create_coords(N,density)
 Lsize = (N/density)^(1/3);
 
 Ncube = 2;
@@ -9,7 +9,7 @@ Ncube
 
 index = [0 0 0]';
 for part = 1:N
-    initial_lattice(:,part) = (index + [0.5 0.5 0.5]')*(Lsize/Ncube);
+    coordinates(:,part) = (index + [0.5 0.5 0.5]')*(Lsize/Ncube);
     index(1) = index(1) + 1;
     if index(1) == Ncube
         index(1) = 0;
