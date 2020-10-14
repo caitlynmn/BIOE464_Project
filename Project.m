@@ -27,7 +27,7 @@ for i = [1 2]
         
         [new_coords new_E] = accept_reject(initial_energies, initial_energies + deltaE, b)
         
-        P(:,i) = rho/b + 1/3*sum(new_E)*(new_coords - corrected_coords);
+        P(:,i) = rho/b + 1/3*sum(new_E*(new_coords - corrected_coords));
     end
 end
 
