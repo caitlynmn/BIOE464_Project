@@ -25,7 +25,7 @@ for i = [1 2]
         
         deltaE = compute_deltaE(corrected_coords,corrected_moved_particles);
         
-        [new_coords new_E] = accept_reject(initial_energies, initial_energies + deltaE, b)
+        [new_coords new_E] = accept_reject(initial_energies, deltaE, b)
         
         P(:,i) = rho/b + 1/3*sum(new_E*(new_coords - corrected_coords));
     end
