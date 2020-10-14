@@ -1,4 +1,4 @@
-function energy=compute_E(corrected_coords) 
+function energy_matrix=compute_E(corrected_coords) 
 
 
         energy = 0;
@@ -6,7 +6,8 @@ function energy=compute_E(corrected_coords)
         nPart = size(corrected_coords,2);
 
         % Loop over all distinct particle pairs
-        for partA = 1:nPart-1
+        for partA = 1:nPart
+            energy = 0;
             for partB = (partA+1):nPart
                 
                 % Calculate particle-particle distance
@@ -30,9 +31,7 @@ function energy=compute_E(corrected_coords)
                 energy = energy + (invDr6 * (invDr6 - 1));
                
             end
+            energy_matrix(partA) = energy*4;
         end
-        
-        % Multiply energy by 4
-        energy = energy*4;
     
 end

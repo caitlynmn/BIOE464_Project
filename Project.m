@@ -5,7 +5,7 @@ clc
 N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 k = 1.380649*10^(-23);  %botlzmann constant
-beta = 1/(k.*T);         %beta in reduced units
+beta = 1./(k.*T);         %beta in reduced units
 
 for i = [1 2]           %iterate twice for two temperatures
     b = beta(i);        %assign beta
@@ -22,7 +22,7 @@ for i = [1 2]           %iterate twice for two temperatures
         
         moved_particles = create_coords(N,Lcube);    %create new coordinates of particles
         corrected_moved_particles = check_coords(moved_particles,Lcube);    %check/correct for no particle overlap
-        proposed_energies = compute_E(corrected_moved_particles)    %compute energies of moved particles
+        proposed_energies = compute_E(corrected_moved_particles);    %compute energies of moved particles
         
         [new_coords new_E] = accept_reject(initial_energies, proposed_energies, b);    %accept/reject based on Boltzmann factor
         
