@@ -4,7 +4,7 @@ clc
 
 N = 500;
 T = [0.9 2.0];
-k = 
+k = 1.380649*10^(-23);
 beta = 1/(k*T);
 
 for i = [1 2]
@@ -27,7 +27,7 @@ for i = [1 2]
         
         [new_coords new_E] = accept_reject(initial_energies, deltaE, b);
         
-        P(:,i) = rho/b + 1/3*sum(new_E*(new_coords - corrected_coords));
+        P(:,i) = rho/b + 1/3*sum(new_E*(new_coords - corrected_coords))/(N/rho);
     end
 end
 
