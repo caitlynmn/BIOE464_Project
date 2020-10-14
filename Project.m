@@ -25,9 +25,9 @@ for i = [1 2]
         
         deltaE = compute_deltaE(corrected_coords,corrected_moved_particles);
         
-        [new_coords new_E] = check_movement(initial_energies, initial_energies + deltaE, b)
+        [new_coords new_E] = accept_reject(initial_energies, initial_energies + deltaE, b)
         
-        P(:,i) = new_coords';
+        P(:,i) = rho/beta + 1/3*sum(new_E)*(new_coords - corrected_coords);
     end
 end
 
@@ -36,4 +36,3 @@ hold on
 plot(0.1:0.1:1,P(:,2)')
 hold off
 legend('T = 0.9','T = 2.0')
-            
