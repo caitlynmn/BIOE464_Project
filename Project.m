@@ -14,5 +14,3 @@ end
 coords = create_coords(N,Lcube);
 
 [corrected_coords corrections] = check_coords(coords,Lcube);
-
-corrections
