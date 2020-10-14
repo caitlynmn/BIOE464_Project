@@ -1,7 +1,4 @@
-function coordinates = create_coords(N,density)
-L = (N/density)^(1/3);
-
-Ncube = round(L);
+function coordinates = create_coords(N,Ncube)
 
 for i = 1:N
     randomx = randi([-Ncube/2 Ncube/2]);
