@@ -8,7 +8,9 @@ if
     % reject displacement move
    
    %if accepting move then update position
+   % need an output
    
+   % I dont think we need the following:
     %(-deltaE > 0) = 2
     % accept when old energy coordinates is less than new energy
     
