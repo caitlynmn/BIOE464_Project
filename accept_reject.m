@@ -1,4 +1,4 @@
-function accept_reject= accept_displacement
+function accept_reject= %need something here
 i= [1 2];
 b=beta(i); %assign beta
 
@@ -8,7 +8,7 @@ if
    (rand < exp(b*-oldE)) = 1
                 % Accept displacement move 
                
-else if
+elseif
                    (rand > exp(beta*newE)) = -1  
     % reject displacement move
    
