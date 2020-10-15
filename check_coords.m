@@ -1,5 +1,10 @@
 function checked_coordinates = check_coords(coordinates,Ncube)
 
+% This function takes in the coordinates of the particles and checks if
+% there are first any particles outside of the cubic lattice and then
+% checks if there are any particle overlaps. If one of the conditions is
+% true, then the coordinates are corrected.
+
 for particle = 1:length(coordinates)    %iterates over all particles
     for component = 1:3    %iterates over each particle's position coordinate
         if coordinates(component,particle) > Ncube/2   %checks if outside of lattice
