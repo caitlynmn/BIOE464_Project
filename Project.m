@@ -1,6 +1,7 @@
 %% BIOE464 Monte Carlo Project
 clear all
 clc
+clf
 
 N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
