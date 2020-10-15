@@ -1,18 +1,15 @@
-function [current_coordinates current_energies] = accept_reject(current_coordinates, corrected_moved_particles,current_energies, proposed_energies, b)
-
-for i= [1 10] %iterate for every particle 
-    
-a= exp(b*-oldE)
-b= exp(b*newE)
-
-if (a<b) %accept displacement move
-    
-   %if accepting move then update position, if rejecting then keep old
-   %position array 
-   
-   % need an output
-     
-     coords(:,i) = rTrial;       % Update positions
-               % energy = energy + deltaE;   % Update energy
+function [new_coordinates new_energy] = accept_reject(oldcoords,proposedcoords,oldE,newE,beta)
+eold = exp(-beta*oldE);
+eproposed = exp(-beta*newE);
+new_coordinates = oldcoords(:,:);
+new_energy = oldE(:,:);
+for i = 1:length(oldE)
+    if eproposed(i) < eold(i)
+        new_coordinates(i) = proposedcoords(i);
+        new_energy(i) = newE(i);
+    elseif rand(1) < exp(-beta*(newE(i)-oldE(i)))
+        new_coordinates(i) = proposedcoords(i);
+        new_energy(i) = newE(i);
     end
+end
 end
