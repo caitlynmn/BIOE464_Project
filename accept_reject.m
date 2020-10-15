@@ -1,4 +1,4 @@
-function
+function accept_reject= accept_displacement
 i= [1 2];
 b=beta(i); %assign beta
 
