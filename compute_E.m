@@ -1,37 +1,32 @@
 function energy_matrix=compute_E(corrected_coords) 
 
+energy = 0;
 
-        energy = 0;
-        % Get the number of particles
-        nPart = size(corrected_coords,2);
+N = length(corrected_coords); % number of particles
 
-        % Loop over all distinct particle pairs
-        for partA = 1:nPart
-            energy = 0;
-            for partB = (partA+1):nPart
-                
-                % Calculate particle-particle distance
-                dr = corrected_coords(:,partA) - corrected_coords(:,partB);
+% Loop over all distinct particle pairs
+for particle = 1:N
+    energy = 0;
+    for particle2 = (particle+1):N
 
-                % Get the distance squared
-                dr2 = sum(dot(dr,dr));
-    
-                % Lennard-Jones potential:
-                % U(r) = 4*epsilon* [(sigma/r)^12 - (sigma/r)^6]
-                %
-                % Here, we set sigma = 1, epsilon = 1 (reduced distance and
-                % energy units). Therefore:
-                %
-                % U(r) = 4 * [(1/r)^12 - (1/r)^6]
-                % 
-                % For efficiency, we will multiply by 4 only after summing
-                % up all the energies.
-                    
-                invDr6 = 1.0/(dr2^3); % 1/r^6
-                energy = energy + (invDr6 * (invDr6 - 1));
-               
-            end
-            energy_matrix(partA) = energy*4;
-        end
+        % compute distance
+        r = corrected_coords(:,particle) - corrected_coords(:,particle2);
+
+        % distance squared
+        r_2 = sum(dot(r,r));
+
+        % LJ potential:
+        % U(r) = 4*epsilon* [(sigma/r)^12 - (sigma/r)^6]
+        %
+        % Reduced units: sigma = 1, epsilon = 1
+        %
+        % U(r) = 4 * [(1/r)^12 - (1/r)^6]
+
+        invr_6 = 1.0/(r_2^3); % 1/r^6
+        energy = energy + (invr_6 * (invr_6 - 1)); % add to energy variable
+
+    end
+    energy_matrix(particle) = energy*4; %multiply by 4 after all energies between particles calculated
+end
     
 end
