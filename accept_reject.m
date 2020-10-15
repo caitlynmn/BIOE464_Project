@@ -1,4 +1,4 @@
-function accept_reject= %need something here
+function p = accept_reject(exp(b*deltaE))
 i= [1 2];
 b=beta(i); %assign beta
 
