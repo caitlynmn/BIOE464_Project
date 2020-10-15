@@ -1,7 +1,5 @@
 function energy_matrix=compute_E(corrected_coords) 
 
-energy = 0;
-
 N = length(corrected_coords); % number of particles
 
 % Loop over all distinct particle pairs
