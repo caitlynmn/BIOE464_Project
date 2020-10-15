@@ -3,12 +3,14 @@ clear all
 clc
 clf
 
+%% Initialize Constant Parameters
 N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 k = 1.380649*10^(-23);  %botlzmann constant
 beta = 1./(k.*T);         %beta in reduced units
 density = 0.1:0.1:1;    %different densities
 
+%% Monte Carlo Simulation
 for i = [1 2]           %iterate twice for two temperatures
     b = beta(i);        %assign beta
     for j = 1:10
@@ -36,6 +38,7 @@ for i = [1 2]           %iterate twice for two temperatures
     end
 end
 
+%% Plotting
 plot(0.1:0.1:1,P(1,:)')
 hold on
 plot(0.1:0.1:1,P(2,:)')
