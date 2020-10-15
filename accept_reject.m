@@ -1,17 +1,12 @@
 function [current_coordinates current_energies] = accept_reject(current_coordinates, corrected_moved_particles,current_energies, proposed_energies, b)
 
-i= [1 2];
-b=beta(i); %assign beta
-
+a= exp(b*-oldE)
+b= exp(b*newE)
 if
-    %need input; initial energry, change in energy and beta
-    
-   (rand < exp(b*-oldE)) = 1
-                % Accept displacement move 
-               
-elseif
-                   (rand > exp(beta*newE)) = -1  
-    % reject displacement move
+   (a<b) %accept displacement move
+   
+  
+          
    
    %if accepting move then update position, if rejecting then keep old
    %position array 
