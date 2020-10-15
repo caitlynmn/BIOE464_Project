@@ -18,6 +18,6 @@ else if
    % need an output
      
      coords(:,i) = rTrial;       % Update positions
-                energy = energy + deltaE;   % Update energy
+               % energy = energy + deltaE;   % Update energy
     end
 end
