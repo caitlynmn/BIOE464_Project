@@ -6,8 +6,5 @@ function coordinates = create_coords(N,Ncube)
 
 for i = 1:N   %iterates for every particle
     %creates random coordinate for x, y, and z
-    randomx = randi([-Ncube/2 Ncube/2]);
-    randomy = randi([-Ncube/2 Ncube/2]);
-    randomz = randi([-Ncube/2 Ncube/2]);
-    coordinates(:,i) = [randomx randomy randomz]';  %adds new coordinate
+    coordinates(:,i) = -Ncube/2 + (Ncube)*rand(3,1)';  %adds new coordinate
 end

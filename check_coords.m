@@ -21,11 +21,8 @@ duplicaterows = setdiff(1:size(checked_coordinates',1), I);       % find duplica
 
 while length(duplicaterows) >= 1       %branches if there are duplicates
     %create new randomly assigned coordinates in x, y, and z
-    randomx = randi([-Ncube/2 Ncube/2]);
-    randomy = randi([-Ncube/2 Ncube/2]);
-    randomz = randi([-Ncube/2 Ncube/2]);
     
-    checked_coordinates(:,duplicaterows(1)) = [randomx randomy randomz]'; %replaces old coordinates
+    checked_coordinates(:,duplicaterows(1)) = -Ncube/2 + (Ncube)*rand(3,1); %replaces old coordinates
     
     [uniques,I,J] = unique(checked_coordinates', 'rows', 'first'); %checks for unique coordinates again
     duplicaterows = setdiff(1:size(checked_coordinates',1), I);   % checks for duplicates again

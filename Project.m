@@ -7,8 +7,9 @@ clf
 N = 10;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 k = 1.380649*10^(-23);  %botlzmann constant
-beta = 1./(k.*T);         %beta in reduced units
+beta = 1./(k.*T);       %beta in reduced units
 density = 0.1:0.1:1;    %different densities
+Nstep = 1000;           %simulation steps
 
 %% Monte Carlo Test with One Density, One Temp
 rho = density(1);
@@ -26,26 +27,24 @@ initial_energies = compute_E(corrected_coords);   %compute energies of particles
 current_coordinates = corrected_coords(:,:);
 current_energies = initial_energies(:,:);
 
-tic;
-for k = 1:1000
+for k = 1:Nstep
 
-% if k == 1
-%     moved_particles = create_coords(N,Lcube);
-% else
+if k == 1
+    moved_particles = create_coords(N,Lcube);
+else
     for particle = 1:N
-        moved_particles(:,particle) = current_coordinates(:,particle) + (rand(3,1)); %create new coordinates of particles 
+        moved_particles(:,particle) = current_coordinates(:,particle) + (rand(3,1)); %adds random movement to particles 
     end
-% end
+end
 
 corrected_moved_particles = check_coords(moved_particles,Lcube);    %check/correct for no particle overlap
 proposed_energies = compute_E(corrected_moved_particles);    %compute energies of moved particles
 
 [current_coordinates current_energies] = accept_reject(current_coordinates, corrected_moved_particles,current_energies, proposed_energies, b);    %accept/reject based on Boltzmann factor
-current_coordinates = check_coords(current_coordinates,Lcube);
-energies(k) = sum(current_energies);
-t(k) = toc;
+current_coordinates = check_coords(current_coordinates,Lcube);  %checks periodic boundary conditions for updated coordinates
+energies(k) = sum(current_energies); %sums updated energies of each particle
 end
-plot(1:1000,energies)
+plot(1:Nstep,energies)
 xlabel('Simulation Step')
 ylabel('Potential Energy')
 title('Plot of Potential Energy at T = 0.9 and Density = 0.1')
