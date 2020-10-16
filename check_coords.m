@@ -1,4 +1,4 @@
-function checked_coordinates = check_coords(coordinates,Ncube)
+function checked_coordinates = check_coords(coordinates,L)
 
 % This function takes in the coordinates of the particles and checks if
 % there are first any particles outside of the cubic lattice and then
@@ -7,10 +7,11 @@ function checked_coordinates = check_coords(coordinates,Ncube)
 
 for particle = 1:length(coordinates)    %iterates over all particles
     for component = 1:3    %iterates over each particle's position coordinate
-        if coordinates(component,particle) > Ncube/2   %checks if outside of lattice
-            coordinates(component,particle) = coordinates(component,particle) - Ncube/2; %corrects
-        elseif coordinates(component, particle) < Ncube/2
-            coordinates(component,particle) = coordinates(component,particle) + Ncube/2;
+        while coordinates(component,particle) > L/2   %checks if outside of lattice
+            coordinates(component,particle) = coordinates(component,particle) - rand(1); %corrects
+        end
+        while coordinates(component, particle) < -L/2
+            coordinates(component,particle) = coordinates(component,particle) + rand(1);
         end
     end
 end
@@ -22,7 +23,7 @@ duplicaterows = setdiff(1:size(checked_coordinates',1), I);       % find duplica
 while length(duplicaterows) >= 1       %branches if there are duplicates
     %create new randomly assigned coordinates in x, y, and z
     
-    checked_coordinates(:,duplicaterows(1)) = -Ncube/2 + (Ncube)*rand(3,1); %replaces old coordinates
+    checked_coordinates(:,duplicaterows(1)) = -L/2 + (L)*rand(3,1); %replaces old coordinates
     
     [uniques,I,J] = unique(checked_coordinates', 'rows', 'first'); %checks for unique coordinates again
     duplicaterows = setdiff(1:size(checked_coordinates',1), I);   % checks for duplicates again

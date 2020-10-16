@@ -4,21 +4,17 @@ clc
 clf
 
 %% Initialize Constant Parameters
-N = 10;                %number of particles
+N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 k = 1.380649*10^(-23);  %botlzmann constant
 beta = 1./(k.*T);       %beta in reduced units
 density = 0.1:0.1:1;    %different densities
-Nstep = 1000;           %simulation steps
+Nstep = 20;             %simulation steps
 
 %% Monte Carlo Test with One Density, One Temp
-rho = density(1);
-b = beta(1);
-L = (N/rho)^(1/3);   %determine length of side of cubic lattice
-Lcube = round(L);    %round length to nearest whole integer
-if mod(Lcube, 2) ~= 0  %round length to nearest even integer
-    Lcube = Lcube + 1;
-end
+rho = density(5);    %density of 0.5
+b = beta(1);         %with T = 0.9
+Lcube = (1/rho)^(1/3);   %determine length of side of cubic lattice (L = 10 here)
 
 coords = create_coords(N,Lcube);  %create coordinates of particles
 corrected_coords = check_coords(coords,Lcube);    %check/correct for no particle overlap
@@ -33,7 +29,7 @@ if k == 1
     moved_particles = create_coords(N,Lcube);
 else
     for particle = 1:N
-        moved_particles(:,particle) = current_coordinates(:,particle) + (rand(3,1)); %adds random movement to particles 
+        moved_particles(:,particle) = current_coordinates(:,particle) + (rand(3,1)); %adds random movement to particles
     end
 end
 
@@ -44,10 +40,18 @@ proposed_energies = compute_E(corrected_moved_particles);    %compute energies o
 current_coordinates = check_coords(current_coordinates,Lcube);  %checks periodic boundary conditions for updated coordinates
 energies(k) = sum(current_energies); %sums updated energies of each particle
 end
+figure(1)
+scatter3(current_coordinates(1,:),current_coordinates(2,:),current_coordinates(3,:))
+xlabel('x')
+ylabel('y')
+zlabel('z')
+title('Positions of Particles within -5 to 5 in x, y, and z')
+figure(2)
 plot(1:Nstep,energies)
+ylim([-max(energies)/5 max(energies)])
 xlabel('Simulation Step')
 ylabel('Potential Energy')
-title('Plot of Potential Energy at T = 0.9 and Density = 0.1')
+title('Plot of Potential Energy at T = 0.9 and Density = 0.5')
 %% Monte Carlo Simulation
 % for i = [1 2]           %iterate twice for two temperatures
 %     b = beta(i);        %assign beta
