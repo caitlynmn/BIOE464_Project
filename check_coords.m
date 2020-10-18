@@ -5,18 +5,19 @@ function checked_coordinates = check_coords(coordinates,L)
 % checks if there are any particle overlaps. If one of the conditions is
 % true, then the coordinates are corrected.
 
-for particle = 1:length(coordinates)    %iterates over all particles
+checked_coordinates = coordinates;
+
+for particle = 1:length(checked_coordinates)    %iterates over all particles
     for component = 1:3    %iterates over each particle's position coordinate
-        while coordinates(component,particle) > L/2   %checks if outside of lattice
-            coordinates(component,particle) = coordinates(component,particle) - rand(1); %corrects
+        while checked_coordinates(component,particle) > L/2   %checks if outside of lattice
+            checked_coordinates(component,particle) = checked_coordinates(component,particle) - rand(1); %corrects
         end
-        while coordinates(component, particle) < -L/2
-            coordinates(component,particle) = coordinates(component,particle) + rand(1);
+        while checked_coordinates(component, particle) < -L/2
+            checked_coordinates(component,particle) = checked_coordinates(component,particle) + rand(1);
         end
     end
 end
 
-checked_coordinates = coordinates(:,:);
 [uniques,I,J] = unique(checked_coordinates', 'rows', 'first');    % find unique coordinates
 duplicaterows = setdiff(1:size(checked_coordinates',1), I);       % find duplicate row indices
 
@@ -27,4 +28,5 @@ while length(duplicaterows) >= 1       %branches if there are duplicates
     
     [uniques,I,J] = unique(checked_coordinates', 'rows', 'first'); %checks for unique coordinates again
     duplicaterows = setdiff(1:size(checked_coordinates',1), I);   % checks for duplicates again
+end
 end

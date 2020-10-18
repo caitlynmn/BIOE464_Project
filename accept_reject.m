@@ -1,17 +1,15 @@
-function [updated_coordinates updated_energy] = accept_reject(old_coords,proposed_coords,initialE,proposedE,beta)
+function [update_coord update_energy] = accept_reject(initial_coord,proposed_coord,initialE,proposedE,beta)
 exp_old = exp(-beta*initialE);
 exp_proposed = exp(-beta*proposedE);
 
-updated_coordinates = old_coords(:,:);
-updated_energy = initialE(:,:);
-
-for i = 1:length(initialE)
-    if exp_proposed(i) > exp_old(i)
-        updated_coordinates(i) = proposed_coords(i);
-        updated_energy(i) = proposedE(i);
-    elseif rand(1) < exp(-beta*(proposedE(i)-initialE(i)))
-        updated_coordinates(i) = proposed_coords(i);
-        updated_energy(i) = proposedE(i);
-    end
+if exp_proposed > exp_old
+    update_coord = proposed_coord;
+    update_energy = proposedE;
+elseif rand(1) < exp(-beta*(proposedE-initialE))
+    update_coord = proposed_coord;
+    update_energy = proposedE;
+else
+    update_coord = initial_coord;
+    update_energy = initialE;
 end
 end

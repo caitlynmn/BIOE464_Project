@@ -14,39 +14,46 @@ Nstep = 20;             %simulation steps
 %% Monte Carlo Test with One Density, One Temp
 rho = density(5);    %density of 0.5
 b = beta(1);         %with T = 0.9
-Lcube = (1/rho)^(1/3);   %determine length of side of cubic lattice (L = 10 here)
+Lcube = (N/rho)^(1/3);   %determine length of side of cubic lattice (L = 10 here)
 
-coords = create_coords(N,Lcube);  %create coordinates of particles
-corrected_coords = check_coords(coords,Lcube);    %check/correct for no particle overlap
-initial_energies = compute_E(corrected_coords);   %compute energies of particles
+% Create initial particle values
+initial_coords = create_coords(N,Lcube);  %create coordinates of particles
+initial_energies = compute_E(initial_coords,0);   %compute energies of particles
 
-current_coordinates = corrected_coords(:,:);
-current_energies = initial_energies(:,:);
-
-for k = 1:Nstep
-
-if k == 1
-    moved_particles = create_coords(N,Lcube);
-else
+for trial = 1:Nstep
     for particle = 1:N
-        moved_particles(:,particle) = current_coordinates(:,particle) + (rand(3,1)); %adds random movement to particles
+        if trial == 1 & particle == 1
+            % Assign all initial particle values to current variables of
+            % all aprticles
+            all_current_coords = initial_coords(:,:);
+            all_current_energies = initial_energies(:,:);
+        end
+        
+        % Assign initial particle position and energy of single particle
+        particle_position = all_current_coords(:,particle);
+        particle_energy = all_current_energies(:,particle);
+        
+        % Simulate proposed movement of single particle
+        proposed_movement = particle_position + (rand(3,1));
+        
+        % Check to see if proposed movement is within periodic boundary
+        % conditions and not overlapping any other particle
+        proposed_coords = all_current_coords(:,:);   %copies all current coordinates
+        proposed_coords(:,particle) = proposed_movement;    %replaces initial particle position with proposed
+        checked_proposed_coords = check_coords(proposed_coords,Lcube);    %check/correct for no particle overlap from moved particle
+        
+        proposed_movement = checked_proposed_coords(:,particle); %assign single proposed movement after checking it is valid
+        proposed_energy = compute_E(checked_proposed_coords,particle);    %compute energy of single moved particle
+       
+        [updated_coord updated_energy] = accept_reject(particle_position, proposed_movement,particle_energy, proposed_energy, b);    %accept/reject based on Boltzmann factor
+        
+        all_current_coords(:,particle) = updated_coord; %updates matrix with all coordinates
+        all_current_energies(:,particle) = updated_energy; %updates matrix with all energies
+        
     end
-end
-
-corrected_moved_particles = check_coords(moved_particles,Lcube);    %check/correct for no particle overlap
-proposed_energies = compute_E(corrected_moved_particles);    %compute energies of moved particles
-
-[current_coordinates current_energies] = accept_reject(current_coordinates, corrected_moved_particles,current_energies, proposed_energies, b);    %accept/reject based on Boltzmann factor
-current_coordinates = check_coords(current_coordinates,Lcube);  %checks periodic boundary conditions for updated coordinates
-energies(k) = sum(current_energies); %sums updated energies of each particle
+    energies(trial) = sum(all_current_energies); %sums updated energies of each particle
 end
 figure(1)
-scatter3(current_coordinates(1,:),current_coordinates(2,:),current_coordinates(3,:))
-xlabel('x')
-ylabel('y')
-zlabel('z')
-title('Positions of Particles within -5 to 5 in x, y, and z')
-figure(2)
 plot(1:Nstep,energies)
 ylim([-max(energies)/5 max(energies)])
 xlabel('Simulation Step')
