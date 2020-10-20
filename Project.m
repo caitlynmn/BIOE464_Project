@@ -6,9 +6,8 @@ clf
 %% Initialize Constant Parameters
 N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
-k = 1.380649*10^(-23);  %botlzmann constant
-beta = 1./(k.*T);       %beta in reduced units
-density = 0.1:0.1:1;    %different densities
+beta = 1./(T);       %beta in reduced units
+density = 0.1:0.1:0.8;    %different densities
 Nstep = 20;             %simulation steps
 
 %% Monte Carlo Test with One Density, One Temp
@@ -55,7 +54,7 @@ for trial = 1:Nstep
 end
 figure(1)
 plot(1:Nstep,energies)
-ylim([-max(energies)/5 max(energies)])
+ylim([-1000 max(energies)])
 xlabel('Simulation Step')
 ylabel('Potential Energy')
 title('Plot of Potential Energy at T = 0.9 and Density = 0.5')
