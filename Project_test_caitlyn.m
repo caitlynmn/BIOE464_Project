@@ -8,7 +8,7 @@ N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 beta = 1./(T);       %beta in reduced units
 density = 0.1:0.1:0.8;    %different densities
-Nstep = 10;             %simulation steps
+Nstep = 20;             %simulation steps
 
 %% Monte Carlo Test with One Density, One Temp
 rho = density(1);    %density of 0.5
@@ -41,14 +41,13 @@ for trial = 1:Nstep
         
         proposed_movement = checked_proposed_coords(:,particle); %assign single proposed movement after checking it is valid
         proposed_energy = compute_E(checked_proposed_coords,particle);    %compute energy of single moved particle
-       
+        
         %% Accept/reject based on Boltzmann
         [updated_coord updated_energy] = accept_reject(particle_position, proposed_movement,particle_energy, proposed_energy, b);    %accept/reject based on Boltzmann factor
         
         %% Update coords and energies for next particle
         all_current_coords(:,particle) = updated_coord; %updates matrix with all coordinates
         all_current_energies(:,particle) = updated_energy; %updates matrix with all energies
-        
     end
     %% Stores energy for trial
     energies(trial) = sum(all_current_energies); %sums updated energies of each particle
