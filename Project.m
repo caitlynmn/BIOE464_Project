@@ -68,7 +68,19 @@ for i = [1 2]           %iterate twice for two temperatures
     end
 end
 
-%% Plotting
+%% Plotting on regular scale
+figure(1)
+plot(density,P(1,:)')  %plots pressure at T = 0.9
+hold on
+plot(density,P(2,:)')  %plots pressure at T = 2.0
+hold off
+legend('T = 0.9','T = 2.0')
+title('Plot of Pressure as a Function of Density')
+xlabel('Density')
+ylabel('Pressure')
+
+%% Plotting on semilogy scale
+figure(2)
 semilogy(density,P(1,:)')  %plots pressure at T = 0.9
 hold on
 semilogy(density,P(2,:)')  %plots pressure at T = 2.0
