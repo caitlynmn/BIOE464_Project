@@ -8,7 +8,9 @@ N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 beta = 1./(T);       %beta in reduced units
 density = 0.1:0.1:0.8;    %different densities
-time_for_equillibrium = [2 3 10 15 30 35 40 50;4 5 10 12 15 20 30 40];
+time_for_equillibrium = [2 3 10 15 30 35 40 50;4 5 10 12 15 20 30 40]; %estimated time for each system to equilibriate,
+%based on MC simulation with each system. each row is for each temperature and
+% each column is for each density
 %% Monte Carlo Simulation
 for i = [1 2]           %iterate twice for two temperatures
     b = beta(i);        %assign beta
