@@ -1,4 +1,4 @@
-function computed_energies = compute_E(proposed_coordinates,part) 
+function computed_energies = compute_E(proposed_coordinates,part,L) 
 
 N = length(proposed_coordinates); % number of particles
 
@@ -13,7 +13,13 @@ if part == 0
 
             % compute distance
             r = proposed_coordinates(:,partA) - proposed_coordinates(:,partB);
-
+            
+            for component = 1:3
+                if abs(r(component)) > L/2
+                    r(component) = L/2 - r(component);
+                end
+            end
+    
             % distance squared
             r_2 = sum(dot(r,r));
 
@@ -41,6 +47,12 @@ else
         else
             % compute distance
             r = proposed_coordinates(:,partA) - proposed_coordinates(:,partB);
+            
+            for component = 1:3
+                if abs(r(component)) > L/2
+                    r(component) = L/2 - r(component);
+                end
+            end
 
             % distance squared
             r_2 = sum(dot(r,r));
@@ -55,6 +67,7 @@ else
             invr_6 = 1.0/(r_2^3); % 1/r^6
             pairwise_energy = (invr_6 * (invr_6 - 1)); % computes energy between pair
             energy = energy + pairwise_energy; % add to energy variable
+            
         end
     end
     computed_energies = energy*4; %multiply by 4 after all energies between particles calculated
