@@ -23,7 +23,7 @@ for i = [1 2]           %iterate twice for two temperatures
         
         %% Create initial particle values
         initial_coords = create_coords(N,L);  %create coordinates of particles
-        initial_energies = compute_E(initial_coords,0);   %compute energies of particles
+        initial_energies = compute_E(initial_coords,0,L);   %compute energies of particles
         
         Nstep = time_for_equillibrium(i,j);
         
@@ -49,7 +49,7 @@ for i = [1 2]           %iterate twice for two temperatures
                 checked_proposed_coords = check_coords(proposed_coords,L);    %check/correct for no particle overlap from moved particle
 
                 proposed_movement = checked_proposed_coords(:,particle); %assign single proposed movement after checking it is valid
-                proposed_energy = compute_E(checked_proposed_coords,particle);    %compute energy of single moved particle
+                proposed_energy = compute_E(checked_proposed_coords,particle,L);    %compute energy of single moved particle
 
                 %% Accept/Reject based on Boltzmann
                 [updated_coord updated_energy] = accept_reject(particle_position, proposed_movement,particle_energy, proposed_energy, b);    %accept/reject based on Boltzmann factor
