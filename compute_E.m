@@ -1,4 +1,4 @@
-function computed_energies = compute_E(proposed_coordinates,part,L) 
+function computed_energies = compute_particle_E(proposed_coordinates,part,L) 
 
 N = length(proposed_coordinates); % number of particles
 
