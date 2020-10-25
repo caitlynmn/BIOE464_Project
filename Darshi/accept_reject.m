@@ -1,4 +1,4 @@
-function [update_coord update_energy] = accept_reject(initial_coord,proposed_coord,initialE,proposedE,beta)
+    function [update_coord update_energy] = accept_reject(initial_coord,proposed_coord,initialE,proposedE,beta)
 exp_old = exp(-beta*initialE);
 exp_proposed = exp(-beta*proposedE);
 
