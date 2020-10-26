@@ -14,17 +14,26 @@ for partA = 1:N
         % compute distance
         r = whole_lattice(:,partA) - whole_lattice(:,partB);
         
+%         r
+        
         for component = 1:3    %minimum image criterion
-            if abs(r(component)) > L/2
-                r(component) = L/2 - r(component);
+            if r(component) > L/2
+                r(component) = r(component) - L;
+            elseif r(component) < -L/2
+                r(component) = r(component) + L;
             end
         end
+        
+%         r
 
         % distance squared
         r_2 = sum(dot(r,r));
 
         invr_6 = 1.0/(r_2^3); % 1/r^6
         pairwise_energy = (invr_6 * (invr_6 - 1)); % computes energy between pair
+        
+%         disp('[partA partB r_2 pairwise_energy]')
+%         [partA partB r_2 pairwise_energy]
         energy = energy + pairwise_energy; % add to energy variable
         end
 

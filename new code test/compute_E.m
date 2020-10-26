@@ -14,11 +14,13 @@ for partB = 1:N
     % compute distance
     r = proposed_coordiantes(:,partA) - proposed_coordiantes(:,partB);
 
-    for component = 1:3   % minimum image criterion
-        if abs(r(component)) > L/2
-            r(component) = L/2 - r(component);
-        end
-    end
+%         for component = 1:3    %minimum image criterion
+%             if r(component) > L/2
+%                 r(component) = L/2 - r(component);
+%             elseif r(component) < -L/2
+%                 r(component) = L/2 + r(component);
+%             end
+%         end
 
     % distance squared
     r_2 = sum(dot(r,r));

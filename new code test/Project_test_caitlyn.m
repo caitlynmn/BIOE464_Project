@@ -23,27 +23,28 @@ for trial = 1:Nstep
     if trial == 1
         % Assign all initial particle values to current variables of all particles
         all_current_coords = initial_coords(:,:);
-        all_current_energies = initial_energies(:,:);
+        all_current_energies = sum(initial_energies(:,:));
     end
 
     % Assign initial particle position and energy of single particle
     particle = randi([1 N]);
     particle_position = all_current_coords(:,particle);
-    particle_energy = all_current_energies(:,particle);
+    particle_energy = all_current_energies;
 
     % Simulate proposed movement of single particle
     proposed_coordinate_lattice = displace_particle(particle,all_current_coords,L);
-    proposed_movement = (proposed_coordinate_lattice(:,particle));
+    proposed_movement = proposed_coordinate_lattice(:,particle);
     
     % Find new energy of proposed movement
-    proposed_energy = compute_E(particle, proposed_coordinate_lattice,L);
-
+    proposed_energy = sum(compute_whole_lattice_E(proposed_coordinate_lattice,L));
+% particle_energy
+% proposed_energy
     % Accept/reject based on Boltzmann
     [updated_coord updated_energy] = accept_reject(particle_position, proposed_movement,particle_energy, proposed_energy, b);    %accept/reject based on Boltzmann factor
-
+% updated_energy
     % Update coords and energies for next particle
     all_current_coords(:,particle) = updated_coord; %updates matrix with all coordinates
-    all_current_energies = compute_whole_lattice_E(all_current_coords,L);
+    all_current_energies = sum(compute_whole_lattice_E(all_current_coords,L));
     
     energies(trial) = sum(all_current_energies); %sums updated energies of each particle
 end
