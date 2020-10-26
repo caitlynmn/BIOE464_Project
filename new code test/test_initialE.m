@@ -14,5 +14,4 @@ b = beta(1);         %with T = 0.9
 L = (N/rho)^(1/3);   %determine length of side of cubic lattice (L = 10 here)
 %% Create initial particle values
 initial_coords = create_coords(N,L);  %create coordinates of particles
-initial_energies = compute_whole_lattice_E(initial_coords,L);   %compute energies of particles
-sum(initial_energies)
+initial_energies = compute_whole_lattice_E(initial_coords,L)   %compute energies of particles
