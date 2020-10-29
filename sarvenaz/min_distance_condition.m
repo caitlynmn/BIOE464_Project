@@ -1,4 +1,4 @@
-function condition = min_distance_condition(coords,L)
+function condition = min_distance_condition(particle,coords,L)
 %% This function currently not in use - doesn't run
 % This function takes in the coordinates and determines if any distance is
 % less than the minimum spacing of rc = 1. If so, the function returns 0
@@ -7,13 +7,22 @@ function condition = min_distance_condition(coords,L)
 
 N = size(coords,2);
 condition = 1;
-for partA = N
+for partA = particle
     for partB = 1:N
         if partB == partA
             continue
         else
             % compute distance
             r = coords(:,partA) - coords(:,partB);
+            
+        for component = 1:3    %minimum image criterion
+            if r(component) > L/2
+                r(component) = r(component) - L;
+            elseif r(component) < -L/2
+                r(component) = r(component) + L;
+            end
+        end
+
 
             % distance squared
             r_2 = sum(dot(r,r));
@@ -31,4 +40,4 @@ for partA = N
     end
     end
 end
-end 
+end
