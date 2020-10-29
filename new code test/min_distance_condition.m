@@ -1,5 +1,4 @@
 function condition = min_distance_condition(particle,coords,L)
-%% This function currently not in use - doesn't run
 % This function takes in the coordinates and determines if any distance is
 % less than the minimum spacing of rc = 1. If so, the function returns 0
 % for false in which it does not meet the condition of distance > rc = 1.

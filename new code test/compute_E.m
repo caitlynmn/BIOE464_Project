@@ -1,4 +1,6 @@
 function computed_energy = compute_particle_E(particle, proposed_coordiantes,L)
+
+%% CURRENTLY NOT USED
 % This function computes the energy for the proposed moved particle in
 % respect to the other particles or their image
 

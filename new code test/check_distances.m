@@ -1,4 +1,5 @@
 function distances = check_distances(whole_lattice, L)
+%% FUNCTION TO CHECK DISTANCES TO CONFIRM INITIAL LATTICE SET UP
 
 N = size(whole_lattice,2); % number of particles
 
