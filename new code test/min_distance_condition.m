@@ -14,11 +14,25 @@ for partA = particle
         else
             % compute distance
             r = coords(:,partA) - coords(:,partB);
-
-            % distance squared
+            
+            for component = 1:3    %minimum image criterion
+                if r(component) > L/2
+                    r(component) = r(component) - L;
+                elseif r(component) < -L/2
+                    r(component) = r(component) + L;
+                end
+            end
+            
+%             for component = 1:3
+%                 if abs(r(component)) < 1
+%                     condition = 0;
+%                     break
+%                 end
+%             end
+%             
             r_2 = sum(dot(r,r));
-
-            if r_2 < 1
+            
+            if sqrt(r_2) < 1
                 condition = 0;
                 break
             end

@@ -1,4 +1,4 @@
-function computed_energies = compute_whole_lattice_E(whole_lattice,L)
+function [computed_energies r_values energy_values]= compute_whole_lattice_E(whole_lattice,L)
 % This function computes all the energies of each particle in the whole
 % lattice and outputs it as computed_energies in an array.
 
@@ -29,8 +29,8 @@ for partA = 1:N
         invr_6 = 1.0/(r_2^3); % 1/r^6
         pairwise_energy = (invr_6 * (invr_6 - 1)); % computes energy between pair
         
-        disp('[partA partB r_2 pairwise_energy]')
-        [partA partB r_2 pairwise_energy]
+%         disp('[partA partB r_2 pairwise_energy]')s
+%         [partA partB r_2 pairwise_energy]
         energy = energy + pairwise_energy; % add to energy variable
         end
 

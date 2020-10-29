@@ -1,12 +1,11 @@
 %% BIOE464 Monte Carlo Project
 clear all
 clc
-clf
 
 %% Initialize Constant Parameters
 N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
-beta = 1./(T);       %beta in reduced units
+beta = 1./T;       %beta in reduced units
 density = 0.1:0.1:0.8;    %different densities
 Nstep = 20;             %simulation steps
 
@@ -37,21 +36,20 @@ for trial = 1:Nstep
     
     % Find new energy of proposed movement
     proposed_energy = compute_whole_lattice_E(proposed_coordinate_lattice,L);
-% particle_energy
-% proposed_energy
+
     % Accept/reject based on Boltzmann
     [updated_coord updated_energy] = accept_reject(particle_position, proposed_movement,particle_energy, proposed_energy, b);    %accept/reject based on Boltzmann factor
-% updated_energy
+
     % Update coords and energies for next particle
     all_current_coords(:,particle) = updated_coord; %updates matrix with all coordinates
-    all_current_energies = compute_whole_lattice_E(all_current_coords,L);
+    all_current_energies = updated_energy;
     
     energies(trial) = all_current_energies; %sums updated energies of each particle
 end
 %% Plot in normal scale
 figure(1)
 energies = [sum(initial_energies) energies];
-plot([0 1:Nstep],1/2*energies)
+plot([0 1:Nstep],energies)
 xlabel('Simulation Step')
 ylabel('Potential Energy')
 title('Plot of Potential Energy at T = 0.9 and Density = 0.5')

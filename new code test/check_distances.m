@@ -10,13 +10,7 @@ for partA = 1:N
         else
 
         % compute distance
-        r = whole_lattice(:,partA) - whole_lattice(:,partB);
-        
-%         for component = 1:3    %minimum image criterion
-%             if abs(r(component)) > L/2
-%                 r(component) = L/2 - r(component);
-%             end
-%         end
+        r = whole_lattice(:,partA) - whole_lattice(:,partB)
 
         % distance squared
         r_2 = sum(dot(r,r));
