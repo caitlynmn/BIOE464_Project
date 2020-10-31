@@ -7,7 +7,7 @@ N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 beta = 1./T;       %beta in reduced units
 density = 0.1:0.1:0.8;    %different densities
-Nstep = 20;             %simulation steps
+Nstep = 20000;             %simulation steps
 
 %% Monte Carlo Test with One Density, One Temp
 rho = density(5);    %density of 0.5
@@ -17,7 +17,7 @@ L = (N/rho)^(1/3);   %determine length of side of cubic lattice (L = 10 here)
 %% Create initial particle values
 initial_coords = create_coords(N,L);  %create coordinates of particles
 initial_energies = compute_whole_lattice_E(initial_coords,L);   %compute energies of particles
-
+tic
 for trial = 1:Nstep
     if trial == 1
         % Assign all initial particle values to current variables of all particles
@@ -36,7 +36,7 @@ for trial = 1:Nstep
     
     % Find new energy of proposed movement
     proposed_energy = compute_whole_lattice_E(proposed_coordinate_lattice,L);
-
+    
     % Accept/reject based on Boltzmann
     [updated_coord updated_energy] = accept_reject(particle_position, proposed_movement,particle_energy, proposed_energy, b);    %accept/reject based on Boltzmann factor
 
@@ -46,6 +46,7 @@ for trial = 1:Nstep
     
     energies(trial) = all_current_energies; %sums updated energies of each particle
 end
+toc
 %% Plot in normal scale
 figure(1)
 energies = [sum(initial_energies) energies];

@@ -8,15 +8,14 @@ function new_coordinate_lattice = displace_particle(particle_index, coordinate_m
 % Output of function is the coordinate lattice with the proposed moved
 % particle
 % 
-% condition = 0;
+condition = 0;
 
-% while condition == 0
-%     proposed_movement = -L/2 + (L)*rand(3,1);
-%     condition = PBC_displacement(particle_index,proposed_movement,initial_coords,L);
-% end
-proposed_movement = -L/2 + (L)*rand(3,1);
-proposed_coords = coordinate_matrix(:,:);
-proposed_coords(:,particle_index) = proposed_movement;
+while condition == 0
+    proposed_movement = -L/2 + (L)*rand(3,1);
+    proposed_coords = coordinate_matrix(:,:);
+    proposed_coords(:,particle_index) = proposed_movement;
+    condition = PBC_displacement(particle_index,proposed_movement,coordinate_matrix,L);
+end
 
 new_coordinate_lattice = proposed_coords;
 end
