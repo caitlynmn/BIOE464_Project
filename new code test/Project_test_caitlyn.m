@@ -5,14 +5,14 @@ clc
 %% Initialize Constant Parameters
 N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
-beta = 1./T;       %beta in reduced units
+beta = 1./T;            %beta in reduced units
 density = 0.1:0.1:0.8;    %different densities
-Nstep = 300000;            %simulation steps
+Nstep = 200000;            %simulation steps
 
 %% One Density, One Temp
-rho = density(5);    %density of 0.5
-b = beta(1);         %with T = 0.9
-L = (N/rho)^(1/3);   %determine length of side of cubic lattice (L = 10 here)
+rho = density(1);    %density of 0.4
+b = beta(2);         %with T = 0.9
+L = (N/rho)^(1/3);   %determine length of side of cubic lattice
 
 %% Create initial particle values for first simulation
 initial_coords = create_coords(N,L);  %create coordinates of particles
@@ -61,12 +61,11 @@ energies = [1/2*sum(initial_energies) energies];
 plot([0 1:Nstep],energies)
 xlabel('Simulation Step')
 ylabel('Potential Energy')
-title('Plot of Potential Energy at T = 0.9 and Density = 0.5')
-
+title(['Plot of Potential Energy at T = ',num2str(1/b),' and Density = ',num2str(rho)])
 %% Storing values from first simulation
-% first_simulation_energies = all_current_energies;
-% first_simulation_coords = all_current_coords;
-% first_simulation_tot_energies = energies;
+first_simulation_energies = all_current_energies;
+first_simulation_coords = all_current_coords;
+first_simulation_tot_energies = energies;
 
 %% Plot for adding onto previous simulation
 % figure(1)
@@ -76,9 +75,14 @@ title('Plot of Potential Energy at T = 0.9 and Density = 0.5')
 % xlim([0 times(1,end)])
 % xlabel('Simulation Step')
 % ylabel('Potential Energy')
-% title('Plot of Potential Energy at T = 0.9 and Density = 0.5')
-
+% title(['Plot of Potential Energy at T = ',num2str(1/b),' and Density = ',num2str(rho)])
 %% Storing new values from previous simulation
 % first_simulation_energies = all_current_energies;
 % first_simulation_coords = all_current_coords;
 % first_simulation_tot_energies = all_energies;
+
+%% Save variables after reaching equilibrium
+% filename = 'dens_0.6_T_2.0.mat';
+% save(filename)
+% csvwrite('d_0.6_T_2.0_coords.txt',first_simulation_coords)
+% csvwrite('d_0.6_T_2.0_energies.txt',first_simulation_tot_energies)
