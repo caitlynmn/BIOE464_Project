@@ -5,6 +5,8 @@
 % the simulations and T_0.9_energies.txt has all the final energies at the
 % end of the simulations.
 
+% ****** Make sure working directory is in data folder with T = 0.9 to run code ******
+
 clear all
 clc
 

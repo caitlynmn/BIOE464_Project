@@ -18,7 +18,7 @@ L = (N/rho)^(1/3);   %determine length of side of cubic lattice
 initial_coords = create_coords(N,L);  %create coordinates of particles
 initial_energies = compute_whole_lattice_E(initial_coords,L);   %compute energies of particles
 
-%% Create initial particle values from previous simulations
+%% Create initial particle values if taking from previous simulations
 % initial_coords = first_simulation_coords;
 % initial_energies = first_simulation_energies;
 % clear energies
@@ -67,7 +67,7 @@ first_simulation_energies = all_current_energies;
 first_simulation_coords = all_current_coords;
 first_simulation_tot_energies = energies;
 
-%% Plot for adding onto previous simulation
+%% Plot if taking from previous simulation
 % figure(1)
 % all_energies = [first_simulation_tot_energies energies];
 % times = [0:length(first_simulation_tot_energies) + Nstep - 1];
@@ -76,7 +76,7 @@ first_simulation_tot_energies = energies;
 % xlabel('Simulation Step')
 % ylabel('Potential Energy')
 % title(['Plot of Potential Energy at T = ',num2str(1/b),' and Density = ',num2str(rho)])
-%% Storing new values from previous simulation
+%% Storing new values from previous simulation to be used in next simulation run
 % first_simulation_energies = all_current_energies;
 % first_simulation_coords = all_current_coords;
 % first_simulation_tot_energies = all_energies;
