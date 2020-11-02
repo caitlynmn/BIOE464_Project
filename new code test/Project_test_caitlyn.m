@@ -7,11 +7,11 @@ N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 beta = 1./T;            %beta in reduced units
 density = 0.1:0.1:0.8;    %different densities
-Nstep = 200000;            %simulation steps
+Nstep = 100;            %simulation steps
 
 %% One Density, One Temp
-rho = density(1);    %density of 0.4
-b = beta(2);         %with T = 0.9
+rho = density(6);    
+b = beta(2);         
 L = (N/rho)^(1/3);   %determine length of side of cubic lattice
 
 %% Create initial particle values for first simulation
@@ -82,7 +82,7 @@ first_simulation_tot_energies = energies;
 % first_simulation_tot_energies = all_energies;
 
 %% Save variables after reaching equilibrium
-% filename = 'dens_0.6_T_2.0.mat';
+% filename = 'dens_0.2_T_2.0.mat';
 % save(filename)
-% csvwrite('d_0.6_T_2.0_coords.txt',first_simulation_coords)
-% csvwrite('d_0.6_T_2.0_energies.txt',first_simulation_tot_energies)
+% csvwrite('d_0.2_T_2.0_coords.txt',first_simulation_coords)
+% csvwrite('d_0.2_T_2.0_energies.txt',first_simulation_tot_energies)

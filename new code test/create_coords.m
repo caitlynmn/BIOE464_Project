@@ -10,7 +10,7 @@ for i = 2:N   %iterates for every particle
     %creates random coordinate for x, y, and z
     
     coordinates(:,i) = -L/2 + (L)*rand(3,1);  %adds new coordinate
-    rc_condition = min_distance_condition(i,coordinates,L);
+    rc_condition = min_distance_condition(i,coordinates,L);  %checks if satisfies rc condition
 
     [uniques,I,J] = unique(coordinates', 'rows', 'first');    % find unique coordinates
     duplicaterows = setdiff(1:size(coordinates',1), I);       % find duplicate row indices

@@ -1,4 +1,10 @@
 %% Compiling Data for T = 0.9
+% This script was used to compile all the simulation data's coordinates and
+% energies at different densities for temperature = 0.9. The final txt file
+% of T_0.9_coords.txt has all the final particle coordinates at the end of
+% the simulations and T_0.9_energies.txt has all the final energies at the
+% end of the simulations.
+
 clear all
 clc
 

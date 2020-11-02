@@ -1,5 +1,8 @@
 function computed_energy = compute_E(particle, whole_lattice,L)
 
+% This function computes the energy of the moved particle with the all other particles
+% and outputs it as computed_energy.
+
 N = size(whole_lattice,2); % number of particles
 % Loop over all distinct particle pairs
 partA = particle;
@@ -27,8 +30,6 @@ for partB = 1:N
     invr_6 = 1.0/(r_2^3); % 1/r^6
     pairwise_energy = (invr_6 * (invr_6 - 1)); % computes energy between pair
         
-%         disp('[partA partB r_2 pairwise_energy]')s
-%         [partA partB r_2 pairwise_energy]
     energy = energy + pairwise_energy; % add to energy variable
     end
 
