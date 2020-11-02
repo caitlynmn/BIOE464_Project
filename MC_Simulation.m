@@ -7,10 +7,10 @@ N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 beta = 1./T;            %beta in reduced units
 density = 0.1:0.1:0.8;    %different densities
-Nstep = 100;            %simulation steps
+Nstep = 200000;            %simulation steps
 
 %% One Density, One Temp
-rho = density(6);    
+rho = density(5);    
 b = beta(2);         
 L = (N/rho)^(1/3);   %determine length of side of cubic lattice
 
@@ -70,7 +70,7 @@ ylabel('Potential Energy')
 title(['Plot of Potential Energy at T = ',num2str(1/b),' and Density = ',num2str(rho)])
 %% Storing values from first simulation
 % Comment out if taking from previous simulation
-
+% 
 first_simulation_energies = all_current_energies;
 first_simulation_coords = all_current_coords;
 first_simulation_tot_energies = energies;
@@ -88,7 +88,7 @@ first_simulation_tot_energies = energies;
 % title(['Plot of Potential Energy at T = ',num2str(1/b),' and Density = ',num2str(rho)])
 %% Storing new values from previous simulation to be used in next simulation run
 % Uncomment if taking from previous simulation
-
+% 
 % first_simulation_energies = all_current_energies;
 % first_simulation_coords = all_current_coords;
 % first_simulation_tot_energies = all_energies;
@@ -97,7 +97,7 @@ first_simulation_tot_energies = energies;
 % Uncomment when system has reached equilibrium
 % Change file names appropriately
 
-% filename = 'dens_0.2_T_2.0.mat';
-% save(filename)
-% csvwrite('d_0.2_T_2.0_coords.txt',first_simulation_coords)
-% csvwrite('d_0.2_T_2.0_energies.txt',first_simulation_tot_energies)
+filename = 'dens_0.5_T_2.0.mat';
+save(filename)
+csvwrite('d_0.5_T_2.0_coords.txt',first_simulation_coords)
+csvwrite('d_0.5_T_2.0_energies.txt',first_simulation_tot_energies')

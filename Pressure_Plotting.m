@@ -5,7 +5,7 @@ clc
 %% Initialize Constant Parameters
 density = 0.1:0.1:0.6;    %different densities
 T = [0.9 2.0];            %different temperatures
-time_for_equilibrium = 10^5 .* [4.5 4.5 5 8 10 14; 0.3 0.2 0.2 0.1 0.5 1.5];
+time_for_equilibrium = 10^5 .* [4.5 4.5 5 8 10 14; 0.175 0.25 0.3 0.6 1.0 1.3];
 % observed simulation steps needed for equilibrium for each simulation with
 % first row being for T = 0.9 and second row for T = 2.0. Each column is
 % for the different densities
