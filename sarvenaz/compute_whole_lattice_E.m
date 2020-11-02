@@ -1,10 +1,10 @@
-function computed_energies = compute_whole_lattice_E(whole_lattice,L)
+function [computed_energies r_values energy_values]= compute_whole_lattice_E(whole_lattice,L)
 % This function computes all the energies of each particle in the whole
 % lattice and outputs it as computed_energies in an array.
 
 N = size(whole_lattice,2); % number of particles
 % Loop over all distinct particle pairs
-for partA = N
+for partA = 1:N
     energy = 0;
     for partB = 1:N
         if partB == partA
@@ -16,8 +16,6 @@ for partA = N
         
         rnew = r;
         
-        
-        
         for component = 1:3    %minimum image criterion
             if rnew(component) > L/2
                 rnew(component) = rnew(component) - L;
@@ -25,16 +23,14 @@ for partA = N
                 rnew(component) = rnew(component) + L;
             end
         end
-        
 
-        r_2 = sum(dot(rnew,rnew));
-
+        r_2 = dot(rnew,rnew);
 
         invr_6 = 1.0/(r_2^3); % 1/r^6
         pairwise_energy = (invr_6 * (invr_6 - 1)); % computes energy between pair
         
-        %disp('[partA partB r_2 pairwise_energy]')
-        %[partA partB r_2 pairwise_energy]
+%         disp('[partA partB r_2 pairwise_energy]')s
+%         [partA partB r_2 pairwise_energy]
         energy = energy + pairwise_energy; % add to energy variable
         end
 

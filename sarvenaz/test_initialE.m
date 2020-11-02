@@ -3,7 +3,7 @@ clear all
 clc
 clf
 %% Initialize Constant Parameters
-N = 5;                %number of particles
+N = 500;                %number of particles
 T = [0.9 2.0];          %temperature values in reduced units
 beta = 1./(T);       %beta in reduced units
 density = 0.1:0.1:0.8;    %different densities

@@ -1,4 +1,4 @@
-function satisfied_condition = PBC_displcaement(particle_number,proposed_movement,coordinates,L)
+function satisfied_condition = PBC_displcaement(particle_number,proposed_move,coordinates,L)
 
 % This function takes in the coordinates of the moved particle and checks if
 % there are first any particles outside of the cubic lattice and then
@@ -6,7 +6,7 @@ function satisfied_condition = PBC_displcaement(particle_number,proposed_movemen
 % true, then the coordinates are corrected.
 
 proposed_coords = coordinates(:,:);  %duplicate initial coordinates
-proposed_coords(:,particle_number) = proposed_movement;   %substitute particle with new particle movements
+proposed_coords(:,particle_number) = proposed_move;   %substitute particle with new particle movements
 
 for component = 1:3    %iterates over each particle's position coordinate
     if proposed_coords(component,particle_number) > L/2   %checks if outside of lattice
