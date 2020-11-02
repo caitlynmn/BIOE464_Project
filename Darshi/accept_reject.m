@@ -5,7 +5,7 @@ exp_proposed = exp(-beta*proposedE);
 random = rand;
 exp_deltaE = exp(-beta*(proposedE-initialE));
 % disp(['oldE: ',num2str(initialE),'    newE: ',num2str(proposedE),'    random: ', num2str(random),'    exp_deltaE: ', num2str(exp_deltaE)])
-if proposedE < initialE
+if particleE < initialE
     update_coord = proposed_coord;
     update_energy = proposedE;
 %     disp('ACCEPTED')
