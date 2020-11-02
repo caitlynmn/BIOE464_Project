@@ -1,4 +1,4 @@
-function [computed_energies r_values energy_values]= compute_whole_lattice_E(whole_lattice,L)
+function computed_energies = compute_whole_lattice_E(whole_lattice,L)
 % This function computes all the energies of each particle in the whole
 % lattice and outputs it as computed_energies in an array.
 
@@ -37,5 +37,4 @@ for partA = 1:N
     end
     computed_energies(partA) = energy*4; %multiply by 4 after all energies between particles calculated
 end
-computed_energies = 1/2*sum(computed_energies);
 end

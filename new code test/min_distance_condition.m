@@ -22,13 +22,6 @@ for partA = particle
                 end
             end
             
-%             for component = 1:3
-%                 if abs(r(component)) < 1
-%                     condition = 0;
-%                     break
-%                 end
-%             end
-%             
             r_2 = sum(dot(r,r));
             
             if sqrt(r_2) < 1
