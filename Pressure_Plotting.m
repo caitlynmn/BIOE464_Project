@@ -11,8 +11,8 @@ time_for_equilibrium = 10^5 .* [4.5 4.5 5 8 10 14; 0.3 0.2 0.2 0.1 0.5 1.5];
 % for the different densities
 
 %% Extract Data from Compiled Simulation Data
-coord_file_names = {'T_0.9_coords.txt', 'T_2.0_coords.txt'};
-energy_file_names = {'T_0.9_energies.txt', 'T_2.0_energies.txt'};
+coord_file_names = {'T_09_coords.txt', 'T_20_coords.txt'};
+energy_file_names = {'T_09_energies.txt', 'T_20_energies.txt'};
 
 for temp_index = [1 2]          %iterate twice for two temperatures
     b = 1/T(temp_index);        %assign beta
