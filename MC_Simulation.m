@@ -97,7 +97,7 @@ first_simulation_tot_energies = energies;
 % Uncomment when system has reached equilibrium
 % Change file names appropriately
 
-filename = 'dens_0.5_T_2.0.mat';
-save(filename)
-csvwrite('d_0.5_T_2.0_coords.txt',first_simulation_coords)
-csvwrite('d_0.5_T_2.0_energies.txt',first_simulation_tot_energies')
+% filename = 'dens_0.5_T_2.0.mat';
+% save(filename)
+% csvwrite('d_0.5_T_2.0_coords.txt',first_simulation_coords)
+% csvwrite('d_0.5_T_2.0_energies.txt',first_simulation_tot_energies')
