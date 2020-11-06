@@ -11,10 +11,10 @@ function new_coordinate_lattice = displace_particle(particle_index, coordinate_m
 condition = 0;
 
 while condition == 0
-    proposed_movement = normrnd(0,(L/6.8),[3,1]);
-    %-L/2 + (L)*rand(3,1)+coordinate_matrix(:,particle_index);    % puts particles in [-L/2 L/2]
+    proposed_movement = normrnd(0,(L/6.8),[3,1]); %Make a random Gaussian displacement for the particle 
     
-    for coords=1:3
+    
+    for coords=1:3 %Checks if particle will be in the boundary
         if abs(proposed_movement(coords))>L/2
             condition=0;
             break
